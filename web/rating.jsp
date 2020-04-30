@@ -134,15 +134,15 @@
                            <form style="margin-left: 1%;" action="rating.jsp?bid=<%out.print(rs1.getString("bid"));%>&svid=<% out.print(rs1.getString("svid"));%>" method="post">
                                 <div style="float:left;width: 100%;margin: 2%;">
                                 <b style="float: left">Rate</b>
-                                <input type="radio" name="rating" value=1 class="star">
-                                <input type="radio" name="rating" value=2 class="star">
-                                <input type="radio" name="rating" value=3 class="star">
-                                <input type="radio" name="rating" value=4 class="star">
-                                <input type="radio" name="rating" value=5 class="star">
+                                <input type="radio" name="rating" value=1 class="star" required="">
+                                <input type="radio" name="rating" value=2 class="star" required="">
+                                <input type="radio" name="rating" value=3 class="star" required="">
+                                <input type="radio" name="rating" value=4 class="star" required="">
+                                <input type="radio" name="rating" value=5 class="star" required="">
                                 </div>
                                 <div style="float:left;width: 100%;margin: 2%;">
                                     <b style="float:left;">Review:</b>
-                                    <textarea  name="rev" class="rev" cols="100" rows='10'></textarea>
+                                    <textarea  name="rev" class="rev" cols="100" rows='10' required></textarea>
                                 </div>
                                 <input type="submit" value="Submit">
                                 

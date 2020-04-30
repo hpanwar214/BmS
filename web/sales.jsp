@@ -1,11 +1,6 @@
 
 <%@ include file="connection.jsp" %>
-<%!
-    public float rate(String email){
-        String sql1="SELECT AVG(RATING) FROM RATING WHERE SVID='"+email+"'";
-        
-    }
-%>
+
 <%
     String city=request.getParameter("city");
     String service=request.getParameter("service");
