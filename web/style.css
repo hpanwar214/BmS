@@ -1,0 +1,265 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 Jan, 2020, 9:49:02 PM
+    Author     : Harshit
+*/
+a{
+    color: black;
+}
+p{
+    margin: 1px 1px 1px 1px;
+}
+.nav1{
+    width: 100%;
+    max-height: 120px;
+    height: auto;
+    background: #000;
+    color: white;   
+    float:left;
+}
+.navM{
+    width: 100%;
+    height: auto;
+    min-height: 90px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    float:left;
+    
+}
+.navL{
+    margin-left: 5%;
+    font-size: 50px;
+    width: 45%;
+    float:left;
+}
+.navR{
+    margin-right: 5%;
+    width: 45%;
+    float: right;
+}
+.btns{
+    width: 75px;
+    height: 50px;
+    color: black;
+    background: lightgoldenrodyellow;
+    margin:2% 2% 2% 2%;
+    float:right;
+   
+}
+
+.showContent{
+    background: #CCFFCC;
+    width: 100%;
+    min-height:300px;
+    height: auto;
+    float:left;
+    margin: 0px 10px 10px 10px;
+}
+.showImage{
+    margin-top:2%;
+    height: 80%;
+    margin-bottom:2%;
+}
+#serviceLogog
+{
+    width:480px;
+    height:275px;
+    border:black;       
+}
+
+nav select{
+    display:none;
+}
+.middle
+{
+    margin-top: 3%;
+    background:url("bootstrap/uclap.jpg");
+    min-height: 250px;
+    height:auto;
+    width: 95%;
+    margin-left: 2.5%;
+    float:left;
+}
+.search-bar-city
+{   
+    margin-top: 2%;
+    border-color: black;
+    float: left;
+    width: 20%;
+    height: 75px;
+    font-size:large;
+}
+.search-bar-service
+{
+    margin-top: 2%;
+    border-color: black;
+    margin-left: 10%;
+    float: left;
+    width: 50%;
+    height: 75px;
+    font-size:large;
+}
+.search-bar-go{
+    margin-top: 2%;
+    border-color: black;
+    float: right;
+    width: 13%;
+    height: 75px;
+    font-size:large;
+    
+}
+.serviceDisplay{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+    height: auto;
+    min-height: 500px;
+    background: cornsilk;
+    float:left;
+}
+.displayer1{
+    width: 100%;
+    margin: 2% 2% 2% 2%;
+    min-height:165px;
+    height: 33%;
+    color: black;
+
+}
+.imgDisplay{
+    width: 100%;
+    min-height: 200px;
+    height: auto;
+    float:left;
+}
+.imgTitle
+{
+    max-width:200px;
+    min-height: 200px;
+    height: auto; 
+    float:left;
+    margin: 2% 2% 2% 2%;
+}
+.imgSize{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2%;
+    
+    float:left;
+}
+.points
+{
+    width: 100%;
+    height: 200px;
+    background: pink;
+    float: left;
+}
+.display
+{
+    width: 100%;
+    height: 100px;
+    float: left;
+    background:#CCFFCC;
+}
+
+
+.content
+{
+    width:100%;
+    min-height: 175px;
+    height: auto; 
+    background:whitesmoke; 
+    float:left;
+    margin-top:2%;
+}
+.box{
+    border:  1px solid black;
+    background:whitesmoke; 
+    width: 100%;
+    min-height:200px;
+    height: auto;
+    margin:0.5%;
+        
+}
+.people
+{
+    min-height:  300px;    
+    height: auto;
+    float: left;
+   width: 98%;
+   border: solid black;
+   box-shadow: 5px 10px #888888;
+
+}
+
+.photo
+{
+    float: left;
+    max-width: 50%;
+    width: auto;
+    height: auto;
+    min-height: 20px;
+    margin: auto;
+    border: 1px solid black;
+    
+
+
+}
+.info
+{
+    margin-left: 5%;
+    margin-top: 2%;
+    font-style: oblique;
+    color:#000;
+    background: white;
+    width: 100%;
+    font-size: larger;
+    float: left;
+}
+.moreinfo
+{
+    float:left;
+    width:100%;
+    height: auto;
+    min-height: 20px;
+    font-style: oblique;
+    font-size:large;
+    color:black;
+    background: #bcdff1;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+.infbtn
+{
+    margin-left:25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 25%;
+    float: left;
+    
+}
+
+
+@media (max-width:960px)
+{
+    nav div{
+        display: none;
+
+    }
+    nav select
+    {
+        display:inline-block;
+    }
+}
+
+@media(max-width:500px)
+{
+    .navL
+    {
+        font-size:32px;
+    }
+}
+
