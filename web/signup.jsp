@@ -157,7 +157,6 @@
                     <div class="left">
                         <h1>Sign up</h1>
                         <form name="myForm" onsubmit="return validate();" method="POST" action="signup.jsp">
-
                             <input type="text" name="username" placeholder="Username" required />
                             <input type="text" name="email" placeholder="E-mail" required  />
                             <input type="text" name="mobile" placeholder="Contact" required  />
@@ -183,7 +182,7 @@
               
                     <div class="right">
                         <span class="loginwith">Sign in with<br />social network</span>
-                        <a href="login.html" style="margin-left:40%;">Already Registered</a>
+                        <a href="login.jsp" style="margin-left:40%;">Already Registered</a>
                         <button class="social-signin facebook">Log in with facebook</button>
                         <button class="social-signin twitter">Log in with Twitter</button>
                         <button class="social-signin google">Log in with Google+</button>

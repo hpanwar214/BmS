@@ -9,11 +9,12 @@
     String dbname="BookService";
     String userID="root";
     String pwd="123";
-    try{
+    try
+    {
         Class.forName(driverName);
     }
     catch(ClassNotFoundException e)
     {
         e.printStackTrace();   
     }
- %>
+%>

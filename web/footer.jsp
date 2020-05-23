@@ -47,7 +47,6 @@
                         <a href="logout.jsp">Logout</a>
                         <%
                     }
-                    
                  %>
                 </p>
                 <p><a href="serviceMan.jsp">Register as Service Man</a></p>

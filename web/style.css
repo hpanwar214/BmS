@@ -77,7 +77,8 @@ nav select{
 .middle
 {
     margin-top: 3%;
-    background:url("bootstrap/uclap.jpg");
+    background:url("myimages/uclap.jpg");
+    background-repeat: repeat;
     min-height: 250px;
     height:auto;
     width: 95%;
@@ -85,7 +86,7 @@ nav select{
     float:left;
 }
 .search-bar-city
-{   
+{  
     margin-top: 2%;
     border-color: black;
     float: left;

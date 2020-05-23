@@ -4,12 +4,47 @@
     Author     : Harshit
 --%>
 <%@include file="connection.jsp" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Statement stmnt=null;
+    response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")==null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    
+    if(session.getAttribute("order")!=null)
+    {
+        int check=Integer.parseInt(session.getAttribute("order").toString());
+        if(check==1)
+        {
+            %>
+            <script>
+                alert("Page Refreshed");
+                window.location="rating.jsp";
+            </script>
+            <%
+            
+        }
+        else
+        {
+            session.setAttribute("order",1);
+        }
+    }
+   
+   Statement stmnt=null;
     ResultSet rs1=null,rs2=null,rs3=null;
     Connection con=null;
+
+    Calendar calendar = Calendar.getInstance();
+        java.util.Date now = calendar.getTime();
+        java.sql.Timestamp  currentTimestamp = new java.sql.Timestamp(now.getTime());
+
+        String mode="";
     int bid=1001;
-    String uid="",svid="",city="",service="",add="";
+    double amount=175.00;
+    String uid="",svid="",city="",service="",add="",mobile="";
     System.out.print("er");
     try
     {
@@ -18,27 +53,45 @@
         String sql1="SELECT COUNT(*) FROM BOOKINGS";
         rs1=stmnt.executeQuery(sql1);
         rs1.next();
-        
         bid=bid+rs1.getInt(1);
-        svid=request.getParameter("svid");
+        if(request.getParameter("mode").equals("paytm"))
+        {
+            mode="PayTM";amount=160.00;   
+            svid=(String)session.getAttribute("svid");
+            add=(String)session.getAttribute("address");
+        }
+        else
+        {
+            mode="Cash On Delievry";
+            amount=175.00;
+            svid=request.getParameter("SV_ID");
+            add=request.getParameter("ADDRESS");
+        }
+
         uid=(String)session.getAttribute("userid");
-        add=(String)request.getParameter("add");
         
-        String sql2="SELECT CITY, SERVICE FROM SERVICEMAN WHERE EMAIL='"+svid+"'";
+        
+        System.out.println(svid+" "+uid+" "+add);
+        
+        String sql2="SELECT CITY, SERVICE,MOBILE FROM SERVICEMAN WHERE EMAIL='"+svid+"'";
         rs2=stmnt.executeQuery(sql2);
         rs2.next();
+        
         city=rs2.getString("CITY");
         service=rs2.getString("SERVICE");
-        
+        mobile=rs2.getString("MOBILE");
         // 1) create a java calendar instance
-        Calendar calendar = Calendar.getInstance();
-        // 2) get a java.util.Date from the calendar instance.
-        //    this date will represent the current instant, or "now".
-        java.util.Date now = calendar.getTime();
-        // 3) a java current time (now) instance
-        java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
-        String sql3="INSERT INTO BOOKINGS(BID,TIMING,CITY,SERVICE,UID,SVID,ADDRESS) VALUES("+bid+",'"+currentTimestamp+"','"+city+"','"+service+"','"+uid+"','"+svid+"','"+add+"')";
-        stmnt.executeUpdate(sql3);
+        
+        String sql3="INSERT INTO BOOKINGS(BID,TIMING,CITY,SERVICE,UID,ADDRESS,SVID) VALUES("+bid+",'"+currentTimestamp+"','"+city+"','"+service+"','"+uid+"','"+add+"','"+svid+"' )";
+        int rowsUpdated=stmnt.executeUpdate(sql3);
+        if(rowsUpdated>0)
+        {
+            %>
+            <script>
+                alert("Booking Successfully Done");
+            </script>
+            <%
+        }
         
     }
     catch(Exception e)
@@ -46,15 +99,13 @@
         e.printStackTrace();
     }
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="style.css" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <script>
+        <title>Order Successful</title>
+        <script>
         function ready(){
             var flag=confirm("Are you sure you want to cancel booking");
             if(flag==true){
@@ -62,7 +113,7 @@
                 window.location = url;
                 return true;
             }
-            
+            return false;
         }
     </script>
     <style>
@@ -70,7 +121,7 @@
             float: left;
             margin: 5%;
             width: 90%;
-            min-height: 20%;
+            max-height:90%;
             height: auto;
             background: lightgoldenrodyellow;;
             border:black solid 4px;
@@ -86,7 +137,7 @@
             float:left;
             margin: 2%;
             width: 90%;
-            min-height:50%;
+            max-height:25%;
             height: auto;
             background: white;
             border:black solid 2px;
@@ -94,13 +145,13 @@
         .cls0121{
             margin: 2%;
             width: 90%;
-            min-height: 50%;
+            max-height: 20%;
             height: auto;
         }
         .cls013{
             float:left;
             width: 90%;
-            margin:1%;
+            margin:8%;
         }
         table {
             border-spacing: 0.5rem;
@@ -116,12 +167,16 @@
         button{
             background: red;
             width:auto;
-            height: 1%;
+            height: 20px;;
          
         }
                     
 
     </style>
+    
+    </head>
+    
+    
     <body>
         <%@include file="header.jsp" %>
         <div class="cls01">
@@ -133,17 +188,17 @@
                 <table class="cls0121">
                     <tr>
                         <th>Booking Id</th>
-                        <th>OTP</th>
-                        <th>Contact</th>
+                        <th>Timing</th>
+                        <th>Contact ServiceMAn</th>
                         <th>Payment Method</th>
                         <th>Amount</th>
                     </tr>
                     <tr>
                         <td><%out.println(bid);%></td>
-                        <td>5465</td>
-                        <td><%out.println(request.getParameter("contact"));%></td>
-                        <td>COD</td>
-                        <td>175.00/-</td>
+                        <td><%out.print(currentTimestamp);%></td>
+                        <td><%out.println(mobile);%></td>
+                        <td><%out.println(mode);%></td>
+                        <td><%out.println(amount+"/-");%></td>
                     </tr>
                 </table>
             </div>
@@ -157,9 +212,9 @@
             </div>
                         <div class='cls013'>
                             <h3>Thank You for booking your service with us</h3> 
-                            <button onclick="return ready()">Cancel Booking</button>
+                            <button onclick="return ready()" style="width: auto;height: 50px;">Cancel Booking</button>
                             
-                            <div style="float:right;margin: .5%;">
+                            <div style="float:right;margin: 2%;">
                                 <a href='index.jsp' style='color: blue'> <h3>>>Continue</h3></a>
                             </div>
                         </div>

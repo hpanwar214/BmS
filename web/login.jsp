@@ -4,6 +4,13 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%
+    response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")!=null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("logout.jsp");
+            return;
+        }
     String email=request.getParameter("login");
     String password=request.getParameter("password");
     //
@@ -39,6 +46,7 @@
                     if(realPwd.equals(password)){
                         request.getSession(true);
                         session.setAttribute("userid",email);
+                        session.setAttribute("order", 0);
                         System.out.println(session.getAttribute("userid").toString()+" welcome");
                         response.sendRedirect("index.jsp");
                     }

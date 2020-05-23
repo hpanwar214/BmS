@@ -7,13 +7,21 @@
 <%@page import="java.sql.Clob"%>
 <%@include file="connection.jsp" %>
 <%
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")==null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    
     Statement stmnt=null;
     ResultSet rs=null,rs2=null;
     Connection con=null;
     String userid="";
     String sellid="";
-    
-            String mobile="";
+
+    String mobile="";
             String em="";
     try{
         System.out.println("welcome to request"); 
@@ -57,7 +65,10 @@
         <script>
             function ready()
             {
-                window.alert("Do you want to order");
+                var flag=window.confirm("Do you want to order");
+                if(flag==true)
+                    return true;
+                return false;
             }
         </script>
         <style>
@@ -136,7 +147,7 @@
                     </div>
                     <div class="infoDis">
                         <p><span class="glyphicon glyphicon-user"></span></p><h2><%out.println(rs.getString("name"));%></h2>
-                        <p><span class="glyphicon glyphicon-map-marker"></span><h2><%out.println(rs.getString("city"));%></h2></p>
+                        <p><span class="glyphicon glyphicon-map-marker"></span></p><h2><%out.println(rs.getString("city"));%></h2>
                     </div>
                     <div class="infoDis">
                         <p><span class="glyphicon glyphicon-phone"></span><h3><%out.println(rs.getString("mobile"));%></h3></p>
@@ -154,7 +165,6 @@
                         <p>_________________________________________</p>
                         <div class='rat1'>
                             <%
-                                
                                 String sql2="SELECT * FROM RATING WHERE SVID='"+sellid+"'";
                                 rs2=stmnt.executeQuery(sql2);
                                 if(rs2!=null){

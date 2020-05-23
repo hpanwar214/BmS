@@ -17,17 +17,42 @@ and open the template in the editor.
        
     </head>
     <body>
-        <%@include file="header.jsp" %>      
-         <div class="middle">
+        <%@include file="header.jsp"%>      
+         <div class="middle" >
             <div class="col-md-3"></div>
             <div class="col-md-6 col-sm-4">
                 <center>
-                    <h2><b>Your Service Expert in your City</b></h2>
+                    <h2><b>Your Service Expert in your City<a href="paytm/TxnTest.jsp">Paytm</a></b></h2>
                     <h3><b>Get Instant Access to reliable and affordable services</b></h3>
                     <form method="GET" action="sales.jsp">
-                        <input name="city" type="text" placeholder="City" class="search-bar-city" required>
-                        <input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>
-                        <input type="submit" value="Go" class="search-bar-go btn-success" required>
+                        <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>-->
+                        <select id="city" name="city" class="search-bar-city" required >
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Ujjain">Ujjain</option>
+                                <option value="Gwalior">Gwalior</option>
+                                <option value="Jabalpur">Jabalpur</option>
+                                <option value="Ratlam">Ratlam</option>
+                                <option value="Mandsaur">Mandsaur</option>
+                                <option value="Dewas">Dewas</option>
+                                <option value="Khandwa">Khandwa</option>
+                                <option value="Khargone">Khargone</option>                                       
+                        </select>
+                        <select id="sercie" name="service" class="search-bar-service" required >
+                                <option value="plumber">Plumber</option>
+                                <option value="electrician">Electrician</option>
+                                <option value="mechanic">Mechanic</option>
+                                <option value="Gargner">Gardener</option>
+                                <option value="Technician">Technician</option>
+                                <option value="Barber">Barber</option>
+                                <option value="Carpenter">Carpenter</option>
+                                <option value="Painter">Painter</option>
+                                <option value="SPA">SPA</option>
+                                <option value="Maids">Maids</option>                                       
+                                <option value="Broker">Broker</option>                                       
+                            </select>
+                        <!--<input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>-->
+                        <input type="submit" value="Go" class="search-bar-go btn-success" >
                     </form>
                 </center>
             </div>

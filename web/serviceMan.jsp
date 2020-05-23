@@ -1,5 +1,12 @@
 <%@ include file="connection.jsp" %>
 <%
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")!=null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("logout.jsp");
+            return;
+        }
     String name=request.getParameter("username");
     String email=request.getParameter("email");
     String mobile=request.getParameter("mobile");

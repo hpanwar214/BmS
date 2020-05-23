@@ -14,6 +14,14 @@
 </html>
 <%@include file='connection.jsp' %>
 <%
+    response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")==null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    
     Statement stmnt=null;
     ResultSet rs1=null,rs2=null,rs3=null;
     Connection con=null;
@@ -25,11 +33,13 @@
         String sql="DELETE FROM BOOKINGS WHERE BID="+bid;
         stmnt.executeUpdate(sql);
         %>
-        <script>
-           ready();
+        <script type='text/javascript'>
+           var t=window.alert("Booking Cancelled");
+           var url= "index.jsp"; 
+           window.location = url;
         </script>
         <%
-        response.sendRedirect("sales.jsp");    
+        //response.sendRedirect("sales.jsp");    
     }
     catch(Exception e)
     {

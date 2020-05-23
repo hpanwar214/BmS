@@ -45,8 +45,33 @@
                     <h2><b>Your Service Expert in your City</b></h2>
                     <h3><b>Get Instant Access to reliable and affordable services</b></h3>
                     <form method="GET" action="sales.jsp">
-                        <input name="city" type="text" placeholder="City" class="search-bar-city" required>
-                        <input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>
+                        <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>
+                        <input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>-->
+                        <select id="city" name="city" class="search-bar-city" required >
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Ujjain">Ujjain</option>
+                                <option value="Gwalior">Gwalior</option>
+                                <option value="Jabalpur">Jabalpur</option>
+                                <option value="Ratlam">Ratlam</option>
+                                <option value="Mandsaur">Mandsaur</option>
+                                <option value="Dewas">Dewas</option>
+                                <option value="Khandwa">Khandwa</option>
+                                <option value="Khargone">Khargone</option>                                       
+                        </select>
+                        <select id="servcie" name="service" class="search-bar-service" required >
+                                <option value="Plumber">Plumber</option>
+                                <option value="Electrician">Electrician</option>
+                                <option value="Mechanic">Mechanic</option>
+                                <option value="Gardner">Gardener</option>
+                                <option value="Technician">Technician</option>
+                                <option value="Barber">Barber</option>
+                                <option value="Carpenter">Carpenter</option>
+                                <option value="Painter">Painter</option>
+                                <option value="SPA">SPA</option>
+                                <option value="Maids">Maids</option>                                       
+                                <option value="Broker">Broker</option>                                       
+                            </select>
                         <input type="submit" value="Go" class="search-bar-go btn-success" required>
                     </form>
                 </center>
@@ -75,7 +100,7 @@
                     <p><span class="glyphicon glyphicon-thumbs-up"></span>Prime service expert</p>
                     <p style="color: green"><span class="glyphicon glyphicon-stats"></span><%out.print(rs.getString("status"));%></p>                   
                 </div>
-                <div class="col-md-1"style="float: left;width:10%;height: 100%">
+                <div class="col-md-1" style="float: left;width:10%;height: 100%">
                     <a href="detail.jsp?sellerid=<%=rs.getString("email")%>"><button class="btn-success" style="margin-top: 4px;" ><span class="glyphicon glyphicon-transfer"></span>Request</button></a> 
                 </div>
         </div>

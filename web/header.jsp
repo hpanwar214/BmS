@@ -17,7 +17,7 @@
             <div class="navM">
                 <div class="navL">
                     <img src='myimages/bms.png' style="width: 10%;height: 10%;margin:5px;">
-                    Book-My-Service
+                    <a href="index.jsp" style="color:white;">Book-My-Service</a>
                 </div>
                 <%
                     if(session.getAttribute("userid")==null)
@@ -44,6 +44,5 @@
                 
             </div>
         </div>  
-        </div>
     </body>
 </html>
