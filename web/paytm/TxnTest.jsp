@@ -116,7 +116,7 @@
 		<table border="5">
 			<tbody>
 				<tr>
-					<th>S.No</th>
+					<th>S.Nos</th>
 					<th>Label</th>
 					<th>Value</th>
 				</tr>

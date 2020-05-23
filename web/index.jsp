@@ -22,7 +22,7 @@ and open the template in the editor.
             <div class="col-md-3"></div>
             <div class="col-md-6 col-sm-4">
                 <center>
-                    <h2><b>Your Service Expert in your City<a href="paytm/TxnTest.jsp">Paytm</a></b></h2>
+                    <h2><b>Your Service Expert in your City</b></h2>
                     <h3><b>Get Instant Access to reliable and affordable services</b></h3>
                     <form method="GET" action="sales.jsp">
                         <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>-->
