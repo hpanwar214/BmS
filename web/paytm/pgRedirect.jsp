@@ -2,8 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*,com.paytm.merchant.CheckSumServiceHelper"%>    
 <%
-    String MID="qHeTRn14861892821176";
-    String MERCHANT_KEY="X9BpS6k6VyqQfzHP";
+    String MID="your Paytm MID";
+    String MERCHANT_KEY="your Paytm Merchant key";
     String INDUSTRY_TYPE_ID="Retail";
     String CHANNEL_ID="WEB";
     String WEBSITE="WEBSTAGING";
