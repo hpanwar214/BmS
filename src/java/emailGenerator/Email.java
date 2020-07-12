@@ -23,8 +23,8 @@ public class Email
         // Recipient's email ID needs to be mentioned.
         String to = receiver;
         // Sender's email ID needs to be mentioned
-        final String from = "mail.bookmyservice@gmail.com";
-        final String pass="book-my-Service2020";
+        final String from = "mail.mysite@gmail.com";
+        final String pass="my_password";
         // Assuming you are sending email from localhost
         String host = "smtp.gmail.com";
         // Get system properties object
