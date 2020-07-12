@@ -26,8 +26,8 @@ public class SmsOtp {
                         Random randomGenerator = new Random();
                         int otp = randomGenerator.nextInt(9999);
                         
-                        //String apiKey = "apikey=" + "SKo6xkwk49Y-ZIJpwuvQqXJ1vf6yo1zrWYiNUIdWzL";
-                        String apiKey = "apikey=" + "/04srJIx7bw-GDYR7KPFDsvlMxctRrxuFawO6uBtZ6";
+                        
+                        String apiKey = "apikey=" + "API key for textlocal";
                         
                         
 			String message = "&message=" + "Hey!"
