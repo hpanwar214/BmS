@@ -21,9 +21,10 @@
                 </div>
                 <%
                     if(session.getAttribute("userid")==null)
-                    {%>
+                    {
+                %>
                         <div class="navR">
-                            <div><a href="signup.jsp"><button class="btns ">Sign Up</button></a></div>
+                            <div><a href="contact.jsp"><button class="btns ">Sign Up</button></a></div>
                             <div><a href="login.jsp"><button class="btns" onmousemove="console">Login</button></a></div>
 
                         </div>

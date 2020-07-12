@@ -13,12 +13,10 @@
         String sql1="SELECT COUNT(*) FROM BOOKINGS";
         rs1=stmnt.executeQuery(sql1);
         rs1.next();
-        int bid=1001+rs1.getInt(1);
+        int bid=20000+rs1.getInt(1);
         
  	Random randomGenerator = new Random();
-	int randomInt = randomGenerator.nextInt(1000000);
-        
-        
+	int randomInt = randomGenerator.nextInt(10000);
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -69,7 +67,7 @@
 				<tr>
 					<td>1</td>
 					<td><label>ORDER_ID::*</label></td>
-                                        <td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID" autocomplete="off" value="ORDS_<%= randomInt %>" readonly>
+                                        <td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID" autocomplete="off" value="ORDS_<%= bid %>" readonly>
 					</td>
 				</tr>
 				

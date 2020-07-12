@@ -4,6 +4,7 @@
     Author     : Harshit
 --%>
 <%@include file="connection.jsp" %>
+<%@page import="emailGenerator.Email" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
@@ -42,7 +43,7 @@
         java.sql.Timestamp  currentTimestamp = new java.sql.Timestamp(now.getTime());
 
         String mode="";
-    int bid=1001;
+    int bid=20000;
     double amount=175.00;
     String uid="",svid="",city="",service="",add="",mobile="";
     System.out.print("er");
@@ -73,7 +74,7 @@
         
         System.out.println(svid+" "+uid+" "+add);
         
-        String sql2="SELECT CITY, SERVICE,MOBILE FROM SERVICEMAN WHERE EMAIL='"+svid+"'";
+        String sql2="SELECT NAME,CITY, SERVICE,MOBILE FROM SERVICEMAN WHERE EMAIL='"+svid+"'";
         rs2=stmnt.executeQuery(sql2);
         rs2.next();
         
@@ -81,8 +82,11 @@
         service=rs2.getString("SERVICE");
         mobile=rs2.getString("MOBILE");
         // 1) create a java calendar instance
+        String sub="BOOKING SUCCESSFULL";
+        String msg="Thanks "+uid+" for booking service with us.\n your booking id is ORDS_"+bid+"\n Service: "+service+"\n ServiceMan: "+rs2.getString("NAME")+"\n Booing Address"
+                +add+"\n Payment Mode "+mode+"\n Serviceman Contact "+mobile+"\n bill amoung "+amount;
         
-        String sql3="INSERT INTO BOOKINGS(BID,TIMING,CITY,SERVICE,UID,ADDRESS,SVID) VALUES("+bid+",'"+currentTimestamp+"','"+city+"','"+service+"','"+uid+"','"+add+"','"+svid+"' )";
+        String sql3="INSERT INTO BOOKINGS(BID,TIMING,CITY,SERVICE,ADDRESS,SVID,UID) VALUES("+bid+",'"+currentTimestamp+"','"+city+"','"+service+"','"+add+"','"+svid+"','"+uid+"' )";
         int rowsUpdated=stmnt.executeUpdate(sql3);
         if(rowsUpdated>0)
         {
@@ -91,6 +95,9 @@
                 alert("Booking Successfully Done");
             </script>
             <%
+            Email email=new Email();
+            String result=email.sendEmail(uid,sub,msg);
+            System.out.print(result);
         }
         
     }
@@ -109,7 +116,7 @@
         function ready(){
             var flag=confirm("Are you sure you want to cancel booking");
             if(flag==true){
-                var url= "cancel.jsp?bid=<%=bid%>"; 
+                var url= "cancel.jsp?bid=<%=bid%>&mode=<%=mode%>"; 
                 window.location = url;
                 return true;
             }

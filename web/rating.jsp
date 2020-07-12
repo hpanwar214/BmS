@@ -50,7 +50,6 @@ if(session.getAttribute("userid")==null)
             <%
             response.sendRedirect("rating.jsp");
         }
-        out.println("er3");
         String sql1="SELECT * FROM BOOKINGS WHERE uid='"+session.getAttribute("userid")+"'";
         rs1=stmnt.executeQuery(sql1);
         

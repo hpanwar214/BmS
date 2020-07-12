@@ -25,8 +25,9 @@ and open the template in the editor.
                     <h2><b>Your Service Expert in your City</b></h2>
                     <h3><b>Get Instant Access to reliable and affordable services</b></h3>
                     <form method="GET" action="sales.jsp">
-                        <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>-->
-                        <select id="city" name="city" class="search-bar-city" required >
+                        <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>
+                        <input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>-->
+                        <select id="city" name="city" class="search-bar-city" style="background: rgb(0,0,0,0.4);" required >
                                 <option value="Bhopal">Bhopal</option>
                                 <option value="Indore">Indore</option>
                                 <option value="Ujjain">Ujjain</option>
@@ -38,11 +39,11 @@ and open the template in the editor.
                                 <option value="Khandwa">Khandwa</option>
                                 <option value="Khargone">Khargone</option>                                       
                         </select>
-                        <select id="sercie" name="service" class="search-bar-service" required >
-                                <option value="plumber">Plumber</option>
-                                <option value="electrician">Electrician</option>
-                                <option value="mechanic">Mechanic</option>
-                                <option value="Gargner">Gardener</option>
+                        <select id="servcie" name="service" class="search-bar-service"  style="background: rgb(0,0,0,0.4);" required >
+                                <option value="Plumber">Plumber</option>
+                                <option value="Electrician">Electrician</option>
+                                <option value="Mechanic">Mechanic</option>
+                                <option value="Gardener">Gardener</option>
                                 <option value="Technician">Technician</option>
                                 <option value="Barber">Barber</option>
                                 <option value="Carpenter">Carpenter</option>
@@ -51,14 +52,11 @@ and open the template in the editor.
                                 <option value="Maids">Maids</option>                                       
                                 <option value="Broker">Broker</option>                                       
                             </select>
-                        <!--<input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>-->
-                        <input type="submit" value="Go" class="search-bar-go btn-success" >
+                        <input type="submit" value="Go" class="search-bar-go btn-success" required>
                     </form>
                 </center>
-            </div>
-          
-        </div>
-        
+            </div>          
+        </div> 
         
         
         <div class="serviceDisplay">

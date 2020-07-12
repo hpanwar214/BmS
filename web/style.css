@@ -77,7 +77,7 @@ nav select{
 .middle
 {
     margin-top: 3%;
-    background:url("myimages/uclap.jpg");
+    //background:rgba(0,0,0,0.3);
     background-repeat: repeat;
     min-height: 250px;
     height:auto;

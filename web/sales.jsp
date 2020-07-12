@@ -1,6 +1,5 @@
 
 <%@ include file="connection.jsp" %>
-
 <%
     String city=request.getParameter("city");
     String service=request.getParameter("service");
@@ -13,10 +12,11 @@
         {
             con=DriverManager.getConnection(url+dbname,userID,pwd);
             stmnt=con.createStatement();
-            String sql="SELECT  * FROM SERVICEMAN WHERE CITY='"+city+"' or SERVICE='"+service+"'";     
+            String sql="SELECT  * FROM SERVICEMAN WHERE CITY='"+city+"' and SERVICE='"+service+"'";     
             rs=stmnt.executeQuery(sql);
         }        
     }
+    
     catch(Exception e)
     {
         e.printStackTrace();
@@ -35,10 +35,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         
     </head>
-    <body>
+    <body >
 
        <%@include file="header.jsp" %> 
-        <div class="middle">
+        <div class="middle" >
             <div class="col-md-3"></div>
             <div class="col-md-6 col-sm-4">
                 <center>
@@ -47,7 +47,7 @@
                     <form method="GET" action="sales.jsp">
                         <!--<input name="city" type="text" placeholder="City" class="search-bar-city" required>
                         <input name="service" type="text" placeholder="Type of Service" class="search-bar-service" required>-->
-                        <select id="city" name="city" class="search-bar-city" required >
+                        <select id="city" name="city" class="search-bar-city" style="background: rgb(0,0,0,0.4);" required >
                                 <option value="Bhopal">Bhopal</option>
                                 <option value="Indore">Indore</option>
                                 <option value="Ujjain">Ujjain</option>
@@ -59,11 +59,11 @@
                                 <option value="Khandwa">Khandwa</option>
                                 <option value="Khargone">Khargone</option>                                       
                         </select>
-                        <select id="servcie" name="service" class="search-bar-service" required >
+                        <select id="servcie" name="service" class="search-bar-service"  style="background: rgb(0,0,0,0.4);" required >
                                 <option value="Plumber">Plumber</option>
                                 <option value="Electrician">Electrician</option>
                                 <option value="Mechanic">Mechanic</option>
-                                <option value="Gardner">Gardener</option>
+                                <option value="Gardener">Gardener</option>
                                 <option value="Technician">Technician</option>
                                 <option value="Barber">Barber</option>
                                 <option value="Carpenter">Carpenter</option>
@@ -78,12 +78,24 @@
             </div>          
         </div>
         <%-- seacrhed content --%>
-        <%if(rs!=null){
-            while(rs.next()){
+        <%
+        if(!rs.next())
+        {
+            %>
+            <div class="merchant">
+                <h2 style="float:left">Sorry! This service is not available in this city</h2>
+            </div>
+            
+            <%
+        }
+        else
+        {
+            do
+            {
         %>
         
-        <div class="merchant ">
-                <div class="col-md-3" style="float: left;width:24%;height: 100% ">
+        <div class="merchant ">               
+            <div class="col-md-3" style="float: left;width:24%;height: 100% ">
                     <img src="<%out.print(rs.getString("image"));%>" class="img-responsive img-circle photo">
                 </div>            
                 <div class="col-md-4" style="float: left;width:32%;height: 100%">
@@ -104,7 +116,11 @@
                     <a href="detail.jsp?sellerid=<%=rs.getString("email")%>"><button class="btn-success" style="margin-top: 4px;" ><span class="glyphicon glyphicon-transfer"></span>Request</button></a> 
                 </div>
         </div>
-        <%}}%>
+        <%
+            }while(rs.next());
+        }
+        
+    %>
         
         <%@ include file = "footer.jsp" %>
     </body>

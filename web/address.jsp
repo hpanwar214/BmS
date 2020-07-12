@@ -3,22 +3,15 @@
     Created on : 28 Apr, 2020, 5:42:58 PM
     Author     : Harshit
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="connection.jsp" %>
 <%
     response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
     if(session.getAttribute("userid")==null)
-        {
-            System.out.println("welcome to request"); 
-            response.sendRedirect("login.jsp");
-            return;
-        }
-    int check=Integer.parseInt(session.getAttribute("order").toString());
-    if(check==1)
     {
-        session.setAttribute("order", 0);
-        
+        System.out.println("welcome to request"); 
+        response.sendRedirect("login.jsp");
+        return;
     }
     Connection con=DriverManager.getConnection(url+dbname,userID,pwd);
     Statement stmnt=con.createStatement();
@@ -31,7 +24,7 @@
         if(address!=null)
         {
             String uid=(String)session.getAttribute("userid");
-            String sql="INSERT INTO ADDRESS(UID,ADDRESS) VALUES('"+uid+"','"+address+"')";
+            String sql="INSERT INTO ADDRESS(ADDRESS,UID) VALUES('"+address+"','"+uid+"')";
             stmnt.executeUpdate(sql);  
             String url2="paytm/TxnTest.jsp?svid="+svid;
             response.sendRedirect(url2+"&address="+address);
@@ -57,11 +50,13 @@
             border:solid black 2px;
             background: lightgoldenrodyellow;
         }
-        form{
+        form
+        {
             width: 100%;
             height: auto;
         }
-        input[type="text"]{
+        input[type="text"]
+        {
             color:black;
             width: 400px;
             display: block;
@@ -76,7 +71,8 @@
             font-size: 15px;
             transition: 0.2s ease;
         }
-        select{
+        select
+        {
             color:black;
             width: 400px;
             display: block;
@@ -92,7 +88,8 @@
             transition: 0.2s ease;
             
         }
-        .clsAdd11{
+        .clsAdd11
+        {
             margin: 1% 1% 1% 1%;
             width: 45%;
             min-height: 90%;
@@ -100,7 +97,8 @@
             border: solid black 2px;
             float:left;
         }
-        .clsAdd12{
+        .clsAdd12
+        {
             width: 45%;
             min-height: 90%;
             float: left;
@@ -153,7 +151,7 @@
                     <h3>Choose Address</h3>
                     
                     <form action='<%out.print(url1);%>' method="post" >
-                        <select id="address" name="address" style="margin:2%;">
+                        <select id="address" name="address" style="margin:2%;"  required>
                                 <%
                                    int i=0;
                                    while(rs2.next())

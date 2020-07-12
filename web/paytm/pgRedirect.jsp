@@ -1,9 +1,8 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*,com.paytm.merchant.CheckSumServiceHelper"%>    
 <%
-   String MID="qHeTRn14861892821176";
+    String MID="qHeTRn14861892821176";
     String MERCHANT_KEY="X9BpS6k6VyqQfzHP";
     String INDUSTRY_TYPE_ID="Retail";
     String CHANNEL_ID="WEB";
@@ -30,8 +29,6 @@ parameters.put("CALLBACK_URL", "http://localhost:8080/BmS/paytm/pgResponse.jsp")
 
 
 String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(MERCHANT_KEY, parameters);
-
-
 StringBuilder outputHtml = new StringBuilder();
 outputHtml.append("<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>");
 outputHtml.append("<html>");
@@ -43,15 +40,11 @@ outputHtml.append("<center><h1>Please do not refresh this page...</h1></center>"
 outputHtml.append("<form method='post' action='"+ PAYTM_URL +"' name='f1'>");
 outputHtml.append("<table border='1'>");
 outputHtml.append("<tbody>");
-
 for(Map.Entry<String,String> entry : parameters.entrySet()) {
 	String key = entry.getKey();
 	String value = entry.getValue();
 	outputHtml.append("<input type='hidden' name='"+key+"' value='" +value+"'>");	
 }	  
-	  
-
-
 outputHtml.append("<input type='hidden' name='CHECKSUMHASH' value='"+checkSum+"'>");
 outputHtml.append("</tbody>");
 outputHtml.append("</table>");

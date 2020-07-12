@@ -1,15 +1,18 @@
-
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.*"%>
 <%
-    String name=request.getParameter("username");
-    String mobile=request.getParameter("mobile");
-    String email=request.getParameter("email");
-    String city=request.getParameter("city");
-    String password=request.getParameter("password");
+    response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+    if(session.getAttribute("userid")!=null)
+        {
+            System.out.println("welcome to request"); 
+            response.sendRedirect("logout.jsp");
+            return;
+        }
+
+    
     
     //db connection
     String driverName="org.apache.derby.jdbc.ClientDriver";
@@ -28,13 +31,21 @@
     Connection con=null;
     Statement statement=null;
     try{
-        if(!email.equals("")){
-
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
-            statement=con.createStatement();
-            String sql="INSERT INTO USERS(NAME,EMAIL,PASSWORD,CITY,MOBILE) VALUES('"+name+"','"+email+"','"+password+"','"+city+"','"+mobile+"')";     
-            statement.executeUpdate(sql);
-            response.sendRedirect("login.jsp");
+        String email=request.getParameter("email");
+        if(email!=null)
+        {
+            if(!email.equals(""))
+            {
+                String name=request.getParameter("username");
+                String mobile=request.getParameter("mobile");
+                String city=request.getParameter("city");
+                String password=request.getParameter("password");
+                con=DriverManager.getConnection(url+dbname,userID,pwd);
+                statement=con.createStatement();
+                String sql="INSERT INTO USERS(NAME,EMAIL,PASSWORD,CITY,MOBILE) VALUES('"+name+"','"+email+"','"+password+"','"+city+"','"+mobile+"')";     
+                statement.executeUpdate(sql);
+                response.sendRedirect("login.jsp");
+            }
         }
     }
     catch(Exception e)
@@ -113,6 +124,137 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
+            
+                        
+body
+{
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #fff;
+    background: url("myimages/back1.jpg"); 
+    background-size: cover;
+}
+.signup
+{
+    background: rgba(44,62,80,0.7);
+    padding: 40px;
+    width: 350px;
+    margin: auto;
+    margin-top: 90px;
+    height: 560px;
+    margin-left: 180x;
+    
+}
+form
+{
+    width: 240px;
+    text-align: center;
+}
+input[type=text]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+input[type=password]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+select[id="city"]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: 2px;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 300px;
+    padding: 5px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+option
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 300px;
+    padding: 5px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: black;
+}
+input[type=submit]
+{
+    border: none;
+    width: 190px;
+    background: white;
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 1px 0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+input[type=submit]:hover
+{
+    color: #fff;
+    background-color: black;
+}
+h2
+{
+    color: white;
+    
+}
+a
+{
+    color: yellow;
+    text-decoration: blink;
+}
+a:hover
+{
+    color: skyblue;
+}
+.container
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+::placeholder {
+    color:aliceblue;
+    opacity: 0.8; /* Firefox */
+}
+
+
+            
+            
+            
             input{
                 width: 80%;
                 height: 30px;
@@ -147,20 +289,20 @@
                 height: 600px;
                 margin-top: 100px;
             }
-        </style>s
+        </style>
     <body>
-      <%@include file="header.jsp" %>
-        <div style="float:left;width: 100%"> 
-            <div class="col-md-3 col-sm-1"></div>
-            <div id="login-box" class="col-md-4 col-sm-2">
+     
+      
+           
+          
                 
-                    <div class="left">
+                    <div class="signup">
                         <h1>Sign up</h1>
                         <form name="myForm" onsubmit="return validate();" method="POST" action="signup.jsp">
                             <input type="text" name="username" placeholder="Username" required />
                             <input type="text" name="email" placeholder="E-mail" required  />
-                            <input type="text" name="mobile" placeholder="Contact" required  />
-                            <select id="city" name="city" >
+                            <input type="text" name="mobile" placeholder="Contact" required  value="<%=request.getParameter("mobile")%>" readonly  />
+                            <select  id="city" name="city" >
                                 <option value="Bhopal">Bhopal</option>
                                 <option value="Indore">Indore</option>
                                 <option value="Ujjain">Ujjain</option>
@@ -176,20 +318,17 @@
                             <input type="password" name="cpassword" placeholder="Retype password" required  />
                         
                         <input type="submit" name="signup_submit" value="Sign me up" style="margin-bottom:10px;" />
+                       
+                        Already have account?<a href="login.jsp" style="text-decoration: none; font-family: 'Play', sans-serif; color: yellow;"><u>&nbsp;Log In</u></a>
+                        
                         </form>
                     </div>
                 
               
-                    <div class="right">
-                        <span class="loginwith">Sign in with<br />social network</span>
-                        <a href="login.jsp" style="margin-left:40%;">Already Registered</a>
-                        <button class="social-signin facebook">Log in with facebook</button>
-                        <button class="social-signin twitter">Log in with Twitter</button>
-                        <button class="social-signin google">Log in with Google+</button>
-                    </div>
-            </div>
-            <div class="col-md-3 col-sm-1"></div>
-        </div>
-        <%@ include file = "footer.jsp" %>
+                   
+           
+            
+        
+      
     </body>
 </html>

@@ -1,8 +1,7 @@
-
 <%@ page import="java.util.*,com.paytm.merchant.CheckSumServiceHelper,javax.servlet.*;"%>
 <%@include file="../connection.jsp" %>
 <%
-  String MID="qHeTRn14861892821176";
+    String MID="qHeTRn14861892821176";
     String MERCHANT_KEY="X9BpS6k6VyqQfzHP";
     String INDUSTRY_TYPE_ID="Retail";
     String CHANNEL_ID="WEB";
@@ -59,7 +58,7 @@ try{
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <%@include file="../header.jsp" %>
+    
     <%
         if(check==1)//payment succesful
         {

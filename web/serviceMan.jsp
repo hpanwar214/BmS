@@ -1,18 +1,12 @@
 <%@ include file="connection.jsp" %>
+<%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
 <%
-response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-    if(session.getAttribute("userid")!=null)
-        {
-            System.out.println("welcome to request"); 
-            response.sendRedirect("logout.jsp");
-            return;
-        }
     String name=request.getParameter("username");
     String email=request.getParameter("email");
     String mobile=request.getParameter("mobile");
     String city=request.getParameter("city");
     String service=request.getParameter("service");
-    String img=request.getParameter("img");
+    String img="myimages/service/"+request.getParameter("img");
     String password=request.getParameter("password");
     String aadhar=request.getParameter("aadhar");
     
@@ -25,7 +19,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
             stmnt=con.createStatement();
             String sql="INSERT INTO SERVICEMAN(NAME,EMAIL,CITY,IMAGE,AADHAR,PASSWORD,SERVICE,MOBILE) VALUES('"+name+"','"+email+"','"+city+"','"+img+"','"+aadhar+"','"+password+"','"+service+"','"+mobile+"')";     
             stmnt.executeUpdate(sql);
-            response.sendRedirect("service.jsp");
+            response.sendRedirect("index.jsp");
         
         }
             
@@ -51,7 +45,24 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
         <link rel="stylesheet" href="sigStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
         <script type="text/javascript">
+            
+                var realFileBtn = document.getElementById("real-file");
+                
+                customBtn.addEventListener("click", function() {
+                realFileBtn.click();
+                    });
+
+               realFileBtn.addEventListener("change", function() {
+                      if (realFileBtn.value) {
+                          customTxt.innerHTML = realFileBtn.value
+                     } else {
+                       customTxt.innerHTML = "No file chosen, yet.";
+                          }
+                     });
+                          
+            
             function validateEmail() 
             {
                  emailID = document.myForm.email.value;
@@ -105,7 +116,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                     document.myForm.password.focus() ;
                     return false;
                  }
-                 if(!document.myForm.img.value.endsWith(".jpeg")||!document.myForm.img.value.endsWith(".jpg")||!document.myForm.img.value.endsWith(".png"))
+                 if(!document.myForm.img.value.endsWith(".jpg"))
                  {
                      alert("Invalid Image Url")
                      document.myForm.img.focus() ;
@@ -125,6 +136,195 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
         </script>
         
         <style>
+            
+body
+{
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #fff;
+    background: url("myimages/back1.jpg"); 
+    background-size: cover;
+}
+.signin
+{
+    background: rgba(44,62,80,0.7);
+    padding: 40px;
+    width: 370px;
+    margin: auto;
+    margin-top: 90px;
+    height: 695px;
+    margin-left: 180x;
+    
+}
+.ctear
+{
+    background: rgba(44,62,80,0.7);
+    padding: 40px;
+    width: 370px;
+    margin: auto;
+    margin-top: 90px;
+    height: 695px;
+    margin-left: 180x;    
+ 
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 400px;
+  height:300px;
+  border-radius: 0 2px 2px 0;
+  float:left;
+
+
+    
+}
+form
+{
+    width: 240px;
+    text-align: center;
+}
+input[type=text]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+input[type=password]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+input[type=file]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 18px;
+    font-weight: 260px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: lightblue;
+}
+
+select[id="city"]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: 2px;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 300px;
+    padding: 5px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+select[id="sercie"]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: 2px;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 300px;
+    padding: 5px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+option
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 300px;
+    padding: 5px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: black;
+}
+input[type=submit]
+{
+    border: none;
+    width: 190px;
+    background: white;
+    color: #000;
+    font-size: 16px;
+    line-height: 5px;
+    padding: 10px 0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+input[type=submit]:hover
+{
+    color: #fff;
+    background-color: black;
+}
+h2
+{
+    color: white;
+    
+}
+a
+{
+    color: yellow;
+    text-decoration: blink;
+}
+a:hover
+{
+    color: skyblue;
+}
+.container
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+::placeholder {
+    color:aliceblue;
+    opacity: 0.8; /* Firefox */
+}
+
+.textbox i{
+    width: 26px;
+    float:left;
+    text-align: center;
+}
+
+
+            
+            
             input{
                 width: 80%;
                 height: 30px;
@@ -164,12 +364,8 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
             }
         </style>
     <body>
-      <%@include file="header.jsp" %>
-        <div style="float:left;width: 100%"> 
-            <div class="col-md-3 col-sm-1"></div>
-            <div id="login-box" class="col-md-4 col-sm-2" >
                 
-                    <div class="left">
+                    <div class="signin">
                         <h1>Sign up</h1>
                         <form name="myForm" onsubmit="return validate()" method="POST" action="serviceMan.jsp">
 
@@ -192,7 +388,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                                 <option value="plumber">Plumber</option>
                                 <option value="electrician">Electrician</option>
                                 <option value="mechanic">mechanic</option>
-                                <option value="Gargner">Gardener</option>
+                                <option value="Gardener">Gardener</option>
                                 <option value="Technician">Technician</option>
                                 <option value="Barber">Barber</option>
                                 <option value="Carpenter">Carpenter</option>
@@ -202,26 +398,26 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                                 <option value="Broker">Broker</option>                                       
                             </select>
                             <input type="text" name="aadhar" placeholder="Aadhar Number" required />
-                            <input type="text" name="img" placeholder="Image URL" required  />
-                        
+                            
+                            <!-- Image Uploader -->                            
+                            <input type="file" id="real-file" name="img"/>                                                     
+                            
                             <input type="password" name="password" placeholder="Password" required />
                             <input type="password" name="cpassword" placeholder="Retype password" required  />
                         
                         <input type="submit" name="signup_submit" value="Sign me up" style="margin-bottom:10px;" />
                         </form>
-                    </div>
+                    
                 
               
-                    <div class="right">
-                        <span class="loginwith">Sign in with<br />social network</span>
-                        <a href="login.html" style="margin-left:40%;">Already Registered</a>
+                    <div class="ctear">
+                        <span class="loginwith"><h3>Sign in with social network</h3></span>
                         <button class="social-signin facebook">Log in with facebook</button>
                         <button class="social-signin twitter">Log in with Twitter</button>
                         <button class="social-signin google">Log in with Google+</button>
+                        <a href="login.jsp"> Already Registered ?</a>
                     </div>
-            </div>
-            <div class="col-md-3 col-sm-1"></div>
-        </div>
-        <%@ include file = "footer.jsp" %>
+                </div>        
+         
     </body>
 </html>

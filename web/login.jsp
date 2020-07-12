@@ -1,16 +1,17 @@
- 
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%
-    response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
     if(session.getAttribute("userid")!=null)
         {
-            System.out.println("welcome to request"); 
             response.sendRedirect("logout.jsp");
-            return;
+            return;            
         }
+%>
+<%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
+
+<%
     String email=request.getParameter("login");
     String password=request.getParameter("password");
     //
@@ -46,11 +47,11 @@
                     if(realPwd.equals(password)){
                         request.getSession(true);
                         session.setAttribute("userid",email);
-                        session.setAttribute("order", 0);
                         System.out.println(session.getAttribute("userid").toString()+" welcome");
                         response.sendRedirect("index.jsp");
                     }
-                    else{
+                    else
+                    {
                         %>
                         <script>
                             alert("Invalid Email or password")
@@ -78,27 +79,10 @@
     
     
 %>
-<html>
-    <script type="test/javascript">
-        function validate()
-        {
-                cred = document.loginform.login.value;
-                atpos = cred.indexOf("@");
-                dotpos = cred.lastIndexOf(".");
 
-                 if (atpos < 1 || ( dotpos - atpos < 2 )) 
-                 {
-                     if(cred.length==10)
-                         return true;
-                     
-                    alert("Please enter correct email ID or Phone Number")
-                    document.myForm.email.focus() ;
-                    return false;
-                 }
-                 return true ;
-        }
-    </script>
-    <head>
+<html>
+    
+    <head>    
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -107,31 +91,178 @@
         <link rel="stylesheet" href="logStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        <style>
+            
+body
+{
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #fff;
+    background: url("myimages/hod.jpg"); 
+    background-size: cover;
+}
+.signin
+{
+    background: rgba(44,62,80,0.7);
+    padding: 40px;
+    width: 350px;
+    margin: auto;
+    margin-top: 90px;
+    height: 400px;
+    margin-left: 180x;
+    
+}
+form
+{
+    width: 240px;
+    text-align: center;
+}
+input[type=text]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+input[type=password]
+{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Play', sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px 0;
+    transition: border 0.5s;
+    outline: none;
+    color: #fff;
+}
+input[type=submit]
+{
+    border: none;
+    width: 190px;
+    background: white;
+    color: #000;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+input[type=submit]:hover
+{
+    color: #fff;
+    background-color: black;
+}
+h2
+{
+    color: white;
+    
+}
+a
+{
+    color: yellow;
+    text-decoration: blink;
+}
+a:hover
+{
+    color: skyblue;
+}
+.container
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+::placeholder {
+    color:aliceblue;
+    opacity: 0.8; /* Firefox */
+}
+
+.textbox i{
+    width: 26px;
+    float:left;
+    text-align: center;
+}
+            
+        </style>    
+        
+        
+        
     </head>
     <body>
-       <%@include file="header.jsp" %>
-       <div class="login">
-                <h1>Login to Web App</h1>
-                <form method="post" action="login.jsp" onsubmit="return validate();" name="login_form">
-                  <p><input type="text" name="login" value="" placeholder="mobile or Email"></p>
-                  <p><input type="password" name="password" value="" placeholder="Password"></p>
-                  <p class="remember_me">
-                    <label>
-                      <input type="checkbox" name="remember_me" id="remember_me">
-                      Remember me on this computer
-                    </label>
-                  </p>
-                  <p class="submit"><input type="submit" name="commit" value="Login"></p>
-                </form>
-                <div class="login-help">
-                    <p><a href="signup.html">Not Registered</a>.</p>
-                    <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
-                </div>
-          </div>
+    
+       <div class="signin">                
+                <form  name="login_form" method="post" action="login.jsp" onsubmit="return validate();">
+                    
+                    <h2 style="color:white">Log In</h2>
+                                
+                    <input type="text" name="login" placeholder="Email or Mobile number" >
 
+            
+                
+                    <input type="password" name="password" placeholder="Password" ><br><br>
+        
+                 <input type="submit" name="commit" value="Login"><br><br>
+                  
+                  <div id="container">
+                      
+                  <a href="reset.jsp" style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Reset password?</a>
+    <a href="forget.jsp" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forget password</a>
+    </div><br /><br /><br />
+                 Don't have account?<a href="contact.jsp" >&nbsp;Sign Up</a>
+
+                  
+                </form>
+                
+       </div>
           
+        <script>
+        function validate()
+        {
+            if( document.login_form.login.value == "" ) 
+                 {
+                    alert( "Please type Valid Email or Mobile number" )
+                    document.login_form.login.focus() ;
+                    return false;
+                 }     
+                  if( document.login_form.password.value == "" ) 
+                 {
+                    alert( "Please type Correct password") 
+                    document.login_form.password.focus() ;
+                    return false;
+                 }  
+                 
+                var cred = document.login_form.login.value;
+                var atpos = cred.indexOf("@");
+                var dotpos = cred.lastIndexOf(".");
+
+                 if (atpos < 1 || ( dotpos - atpos < 2 )) 
+                 {
+                     if(cred.length==10)
+                         return true;
+                     
+                    alert("Please enter correct email ID or Phone Number")
+                    document.login_form.login.focus() ;
+                    return false;
+                 }
+                 
+                 
+                 
+                 return true ;
+        }
+    </script>
         
-        
-        <%@ include file = "footer.jsp" %>
+      
     </body>
 </html>
