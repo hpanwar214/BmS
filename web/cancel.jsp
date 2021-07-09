@@ -28,7 +28,7 @@
     Connection con=null;
     try
     {
-        con=DriverManager.getConnection(url+dbname,userID,pwd);
+        con=DriverManager.getConnection(url);
         stmnt=con.createStatement();
         String bid=request.getParameter("bid");
         String sql="DELETE FROM BOOKINGS WHERE BID="+bid;
@@ -46,7 +46,7 @@
         System.out.print(result);
         
         %>
-        <script type='text/javascript'>
+        <script>
            var t=window.alert("Booking Cancelled");
            var url= "index.jsp"; 
            window.location = url;

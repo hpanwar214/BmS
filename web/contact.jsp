@@ -5,23 +5,40 @@
 <%@page import="java.util.*"%>
 <%@page import="generateOtp.SmsOtp" %> 
 <%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
+<%@include file="connection.jsp" %>
 <%
     boolean gen_otp=false;
     int otp=0;
-    String mobile=request.getParameter("mobile");
+    String mobile=(String)request.getParameter("mobile");
     
-    try{
-    if(mobile!=null&&!gen_otp)
+    Connection con=null;
+    Statement statement=null;
+    try
     {
-        SmsOtp sms=new SmsOtp();
-        mobile=(String)request.getParameter("mobile");
-        session.setAttribute("mobile",mobile);
-        otp = sms.sendSms(mobile);
-        session.setAttribute("otp",otp);
-        gen_otp=true;
-        System.out.print(otp+"  otp");
-    }
-     System.out.print(mobile+" mobile");       
+        con=DriverManager.getConnection(url);
+        statement=con.createStatement();
+        String sql="SELECT MOBILE FROM USERS WHERE MOBILE='"+mobile+"'" ;  
+        ResultSet rs_1= statement.executeQuery(sql);
+        if(rs_1!=null)
+        {
+            %>
+            <script>alert("Mobile Number already registered. Try New Mobile No.")</script>
+            <%
+        }
+        else
+        {
+            if(mobile!=null&&!gen_otp)
+            {
+                SmsOtp sms=new SmsOtp();
+                session.setAttribute("mobile",mobile);
+                otp = sms.sendSms(mobile);
+                session.setAttribute("otp",otp);
+                gen_otp=true;
+                System.out.print(otp+"  otp");
+            }
+            System.out.print(mobile+" mobile");       
+        }
+        
     }
     catch(Exception e)
     {
@@ -42,7 +59,7 @@
               }
               else
               {
-                  alert("otp sent")
+                  alert("OTP generated. Verify it in 120 seconds")
                   return true;
               }
               
@@ -282,7 +299,7 @@ a:hover
               
           
             
-
+<% con.close();%>
         </div>
          
     </body>

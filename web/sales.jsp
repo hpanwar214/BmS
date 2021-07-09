@@ -10,11 +10,16 @@
     {    
         if(!city.equals(""))
         {
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             stmnt=con.createStatement();
-            String sql="SELECT  * FROM SERVICEMAN WHERE CITY='"+city+"' and SERVICE='"+service+"'";     
+            System.out.println("here 1");
+            city=city.trim();
+            service=service.trim();
+            String sql="select  * from serviceman where city='"+city+"' or service='"+service+"'";    
             rs=stmnt.executeQuery(sql);
-        }        
+            System.out.println("here 2");
+        }  
+        
     }
     
     catch(Exception e)
@@ -92,6 +97,8 @@
         {
             do
             {
+                System.out.println("jrt1");            
+
         %>
         
         <div class="merchant ">               
@@ -120,7 +127,9 @@
             }while(rs.next());
         }
         
+        
     %>
+    <% con.close();%>
         
         <%@ include file = "footer.jsp" %>
     </body>

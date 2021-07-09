@@ -43,18 +43,21 @@
         java.sql.Timestamp  currentTimestamp = new java.sql.Timestamp(now.getTime());
 
         String mode="";
-    int bid=20000;
+        Random randomGenerator = new Random();
+	int randomInt = randomGenerator.nextInt(100000);
+        
+    int bid=randomInt;
     double amount=175.00;
     String uid="",svid="",city="",service="",add="",mobile="";
     System.out.print("er");
     try
     {
-        con=DriverManager.getConnection(url+dbname,userID,pwd);
+        con=DriverManager.getConnection(url);
         stmnt=con.createStatement();
         String sql1="SELECT COUNT(*) FROM BOOKINGS";
         rs1=stmnt.executeQuery(sql1);
         rs1.next();
-        bid=bid+rs1.getInt(1);
+        
         if(request.getParameter("mode").equals("paytm"))
         {
             mode="PayTM";amount=160.00;   
@@ -99,6 +102,7 @@
             String result=email.sendEmail(uid,sub,msg);
             System.out.print(result);
         }
+        
         
     }
     catch(Exception e)
@@ -227,6 +231,6 @@
                         </div>
         </div>
         <%@include file="footer.jsp" %>                      
-        
+        <% con.close();%>
     </body>
 </html>

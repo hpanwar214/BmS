@@ -14,7 +14,7 @@ and open the template in the editor.
     ResultSet rs=null;
     try{    if(!city.equals(""))
         {
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             stmnt=con.createStatement();
             String sql="SELECT  * FROM SERVICEMAN WHERE CITY='"+city+"' or SERVICE='"+service+"'";     
             rs=stmnt.executeQuery(sql);

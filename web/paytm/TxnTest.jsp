@@ -1,22 +1,22 @@
 <%@include file="../connection.jsp" %>
  <%@page import="java.util.*" %>  
  <%
-        Connection con=DriverManager.getConnection(url+dbname,userID,pwd);
+        Connection con=DriverManager.getConnection(url);
         Statement stmnt=con.createStatement();
         ResultSet rs1=null;
         String address=request.getParameter("address");
         System.out.println(address);
         session.setAttribute("address",address);
         session.setAttribute("svid",request.getParameter("svid"));
-        con=DriverManager.getConnection(url+dbname,userID,pwd);
-        stmnt=con.createStatement();
+        
         String sql1="SELECT COUNT(*) FROM BOOKINGS";
         rs1=stmnt.executeQuery(sql1);
         rs1.next();
         int bid=20000+rs1.getInt(1);
         
  	Random randomGenerator = new Random();
-	int randomInt = randomGenerator.nextInt(10000);
+	int randomInt = randomGenerator.nextInt(100000);
+        bid=randomInt;
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 

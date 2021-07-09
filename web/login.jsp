@@ -10,51 +10,57 @@
         }
 %>
 <%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
-
+<%@include file="connection.jsp" %>
 <%
-    String email=request.getParameter("login");
-    String password=request.getParameter("password");
-    //
-    String driverName="org.apache.derby.jdbc.ClientDriver";
-    String url="jdbc:derby://localhost:1527/";
-    String dbname="BookService";
-    String userID="root";
-    String pwd="123";
-    try{
-        Class.forName(driverName);
-    }
-    catch(ClassNotFoundException e)
-    {
-        e.printStackTrace();   
-    }
+    String email=((String)request.getParameter("login")==null)?"?":(String)request.getParameter("login");
+    String password=(String)request.getParameter("password");
     
     Connection con=null;
     Statement statement=null;
     try{
-        if(!email.equals(""))
+        System.out.println("tsdasyu  "+(request.getParameter("login")+" , kjn j "+email));
+        if(true)
         {
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            System.out.println("tsdasyu");
+            con=DriverManager.getConnection(url);
+            
             statement=con.createStatement();
+            
             String sql="SELECT EMAIL, MOBILE, PASSWORD FROM USERS WHERE EMAIL='"+email+"' OR MOBILE='"+email+"'" ;  
             ResultSet rs= statement.executeQuery(sql);
+            System.out.println("tyu");
             if(rs!=null)
             {
 
                 if(rs.next()){
-                    email=rs.getString("email");
+                    String id=rs.getString("email");
                     String mobile=rs.getString("mobile");
                     String realPwd=rs.getString("password");
-                    if(realPwd.equals(password)){
-                        request.getSession(true);
-                        session.setAttribute("userid",email);
-                        System.out.println(session.getAttribute("userid").toString()+" welcome");
-                        response.sendRedirect("index.jsp");
+                    if(email.equals(id)||email.equals(mobile))
+                    {
+                        if(realPwd.equals(password))
+                        {
+                            request.getSession(true);
+                            session.setAttribute("userid",email);
+                            System.out.println(session.getAttribute("userid").toString()+" welcome");
+                            response.sendRedirect("index.jsp");
+                        }
+                        else
+                        {
+                            %>
+                            <script>
+                                alert("Incorrect password");
+                            </script>      
+                            %<
+                        }
+                        
                     }
+                    
                     else
                     {
                         %>
                         <script>
-                            alert("Invalid Email or password")
+                            alert("Email or Mobile no. not registered");
                         </script>
                         <%
                     }
@@ -71,6 +77,7 @@
             }
         }
         
+    }
     }
     catch(Exception e)
     {
@@ -214,6 +221,7 @@ a:hover
                     <input type="password" name="password" placeholder="Password" ><br><br>
         
                  <input type="submit" name="commit" value="Login"><br><br>
+                 <p> For Guest Login use ID: user1@gmail.com and pwd: qwerty123</p>
                   
                   <div id="container">
                       
@@ -263,6 +271,6 @@ a:hover
         }
     </script>
         
-      
+      <% con.close();%>
     </body>
 </html>

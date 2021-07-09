@@ -19,7 +19,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
     ResultSet rs1=null,rs2=null;
     Connection con=null;
     try{
-        con=DriverManager.getConnection(url+dbname,userID,pwd);
+        con=DriverManager.getConnection(url);
         stmnt=con.createStatement();
         String sql1="SELECT * FROM USERS WHERE EMAIL='"+session.getAttribute("userid")+"'";
         rs1=stmnt.executeQuery(sql1);
@@ -87,7 +87,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
             </div>
             
         </div>
-        
+        <% con.close();%>
         <%@include file="footer.jsp" %>
     </body>
 </html>

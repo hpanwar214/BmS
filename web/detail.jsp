@@ -37,7 +37,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
         else
             
         {   
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             stmnt=con.createStatement();
             userid=(String)session.getAttribute("userid");
             sellid=request.getParameter("sellerid");
@@ -45,6 +45,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
             rs=stmnt.executeQuery(sql);
             
         }
+        
     
     }
     catch(Exception e)
@@ -167,7 +168,9 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                             <%
                                 String sql2="SELECT * FROM RATING WHERE SVID='"+sellid+"'";
                                 rs2=stmnt.executeQuery(sql2);
+                                System.out.println("er 456");
                                 if(rs2!=null){
+                                    System.out.println("er 1");
                                 while(rs2.next())
                                 {%>
                                 <div style='width: 90%;height: auto;margin: 1%;background: white;'>
@@ -186,16 +189,10 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                                     st--;
                                     
                                 }%></div><%
-                                Clob clob = rs2.getClob("review");
-                                Reader r = clob.getCharacterStream();
-                                StringBuffer buffer = new StringBuffer();
-                                int ch;                                
-                                while ((ch = r.read())!=-1) {
-                                   buffer.append(""+(char)ch);
-                                }
-                                System.out.println("Contents: "+buffer.toString());
+                                String clob = rs2.getString("review");
+                                
                                 %>
-                                <p><b><% out.println(buffer.toString());%></b></p>
+                                <p><b><% out.println(clob);%></b></p>
                                 <hr style="magin:1%;">
                                 
                                 </div>
@@ -217,7 +214,7 @@ response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
                         <center><a href="address.jsp?contact=<%=mobile%>&svid=<%=em%>"><button value="Order" class="btn-info" onclick="return ready()" style="margin: 10px;">Order</button></a></center>
                         
                     </div>
-               
+               <% con.close();%>
         </div>
         
         

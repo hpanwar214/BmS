@@ -3,6 +3,8 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.*"%>
+<%@include file='connection.jsp' %>
+
 <%
     response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
     if(session.getAttribute("userid")!=null)
@@ -11,23 +13,6 @@
             response.sendRedirect("logout.jsp");
             return;
         }
-
-    
-    
-    //db connection
-    String driverName="org.apache.derby.jdbc.ClientDriver";
-    String url="jdbc:derby://localhost:1527/";
-    String dbname="BookService";
-    String userID="root";
-    String pwd="123";
-    try{
-        Class.forName(driverName);
-    }
-    catch(ClassNotFoundException e)
-    {
-        e.printStackTrace();   
-    }
-    
     Connection con=null;
     Statement statement=null;
     try{
@@ -40,7 +25,7 @@
                 String mobile=request.getParameter("mobile");
                 String city=request.getParameter("city");
                 String password=request.getParameter("password");
-                con=DriverManager.getConnection(url+dbname,userID,pwd);
+                con=DriverManager.getConnection(url);
                 statement=con.createStatement();
                 String sql="INSERT INTO USERS(NAME,EMAIL,PASSWORD,CITY,MOBILE) VALUES('"+name+"','"+email+"','"+password+"','"+city+"','"+mobile+"')";     
                 statement.executeUpdate(sql);
@@ -328,7 +313,7 @@ a:hover
                    
            
             
-        
+        <% con.close();%>
       
     </body>
 </html>

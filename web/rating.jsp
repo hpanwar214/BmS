@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : rating
     Created on : 30 Apr, 2020, 2:52:04 PM
     Author     : Harshit
@@ -20,7 +20,7 @@ if(session.getAttribute("userid")==null)
     ResultSet rs1=null,rs2=null;
     Connection con=null;
     try{
-        con=DriverManager.getConnection(url+dbname,userID,pwd);
+        con=DriverManager.getConnection(url);
         stmnt=con.createStatement();
         if(request.getParameter("bid")!=null)
         {
@@ -37,7 +37,7 @@ if(session.getAttribute("userid")==null)
             String sql="INSERT INTO RATING(UID,SVID,STARS,REVIEW,TIMING,BID) VALUES('"+uid+"','"+svid+"',"+stars+",'"+review+"','"+currentTimestamp+"','"+bid+"')";
             stmnt.executeUpdate(sql);
             
-            sql="UPDATE BOOKINGS SET REVIEW=TRUE WHERE BID="+bid;
+            sql="UPDATE BOOKINGS SET REVIEW=TRUE WHERE BID='"+bid+"'";
             stmnt.executeUpdate(sql);
             %>
             <script>alert("successful")</script>
@@ -168,6 +168,7 @@ if(session.getAttribute("userid")==null)
                 %>
             </div>
         </div>
+            <% con.close();%>
         <%@include file="footer.jsp" %>
     </body>
 </html>

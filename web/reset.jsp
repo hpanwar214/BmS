@@ -11,33 +11,20 @@
 <%@page import="java.sql.ResultSet"%>
 
 <%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
-
+<%@include file="connection.jsp" %>
 <%
     String email=request.getParameter("login");
     String password=request.getParameter("password");
     String username1=request.getParameter("username1");
     String username2=request.getParameter("username2");
     
-    //
-    String driverName="org.apache.derby.jdbc.ClientDriver";
-    String url="jdbc:derby://localhost:1527/";
-    String dbname="BookService";
-    String userID="root";
-    String pwd="123";
-    try{
-        Class.forName(driverName);
-    }
-    catch(ClassNotFoundException e)
-    {
-        e.printStackTrace();   
-    }
     
     Connection con=null;
     Statement statement=null;
     try{
         if(!email.equals(""))
         {
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             statement=con.createStatement();
             String sql="SELECT EMAIL, MOBILE, PASSWORD FROM USERS WHERE EMAIL='"+email+"' OR MOBILE='"+email+"'" ;  
             ResultSet rs= statement.executeQuery(sql);
@@ -355,6 +342,7 @@ input[type=submit]:hover
                  return true ;
              } 
     </script>
+    <% con.close();%>
 </form>
 </div>
 </body>

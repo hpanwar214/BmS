@@ -23,7 +23,7 @@
         if(receiver!=null)
         {
             System.out.println(receiver+" "); 
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             stmnt=con.createStatement();
             String sql="SELECT PASSWORD FROM USERS WHERE EMAIL='"+receiver+"'";
             rs1=stmnt.executeQuery(sql);
@@ -217,6 +217,7 @@ input[type=button]:hover
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 </script>
+<% con.close();%>
 </form>
 </div>
 </body>

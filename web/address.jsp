@@ -13,7 +13,7 @@
         response.sendRedirect("login.jsp");
         return;
     }
-    Connection con=DriverManager.getConnection(url+dbname,userID,pwd);
+    Connection con=DriverManager.getConnection(url);
     Statement stmnt=con.createStatement();
     ResultSet rs=null;
     String address=request.getParameter("address");
@@ -177,7 +177,7 @@
         %>
             </div>
         </div>
-           
+           <% con.close();%>
         <%@include file="footer.jsp" %>
     </body>
 </html>

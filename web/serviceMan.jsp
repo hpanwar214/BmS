@@ -1,25 +1,29 @@
 <%@ include file="connection.jsp" %>
 <%response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");%>
 <%
+    
     String name=request.getParameter("username");
-    String email=request.getParameter("email");
+    String email=(String)request.getParameter("email");
+    System.out.println(" "+name+" "+email);
     String mobile=request.getParameter("mobile");
     String city=request.getParameter("city");
     String service=request.getParameter("service");
     String img="myimages/service/"+request.getParameter("img");
     String password=request.getParameter("password");
     String aadhar=request.getParameter("aadhar");
-    
+    boolean flag=false;
     Connection con=null;
     Statement stmnt=null;
     try{
-        if(!email.equals(""))
+        if(true)
         {
-            con=DriverManager.getConnection(url+dbname,userID,pwd);
+            con=DriverManager.getConnection(url);
             stmnt=con.createStatement();
-            String sql="INSERT INTO SERVICEMAN(NAME,EMAIL,CITY,IMAGE,AADHAR,PASSWORD,SERVICE,MOBILE) VALUES('"+name+"','"+email+"','"+city+"','"+img+"','"+aadhar+"','"+password+"','"+service+"','"+mobile+"')";     
+            if(email.contains("@"))
+            {String sql="INSERT INTO SERVICEMAN(NAME,EMAIL,CITY,IMAGE,AADHAR,PASSWORD,SERVICE,MOBILE) VALUES('"+name+"','"+email+"','"+city+"','"+img+"','"+aadhar+"','"+password+"','"+service+"','"+mobile+"')";     
             stmnt.executeUpdate(sql);
             response.sendRedirect("index.jsp");
+            }
         
         }
             
@@ -116,12 +120,7 @@
                     document.myForm.password.focus() ;
                     return false;
                  }
-                 if(!document.myForm.img.value.endsWith(".jpg"))
-                 {
-                     alert("Invalid Image Url")
-                     document.myForm.img.focus() ;
-                    return false;
-                 }
+                 
 
                  if(!document.myForm.password.match(document.myForm.cpassword))
                  {
@@ -366,7 +365,7 @@ a:hover
     <body>
                 
                     <div class="signin">
-                        <h1>Sign up</h1>
+                        <h1>Sign up for Serviceman.</h1>
                         <form name="myForm" onsubmit="return validate()" method="POST" action="serviceMan.jsp">
 
                             <input type="text" name="username" placeholder="Username" required />
@@ -400,24 +399,18 @@ a:hover
                             <input type="text" name="aadhar" placeholder="Aadhar Number" required />
                             
                             <!-- Image Uploader -->                            
-                            <input type="file" id="real-file" name="img"/>                                                     
+                            <p class="myForm" >Upload Profile Picture</p><input type="file" id="real-file" name="img" />                                                     
                             
                             <input type="password" name="password" placeholder="Password" required />
                             <input type="password" name="cpassword" placeholder="Retype password" required  />
-                        
+                        <% flag=true;%>
                         <input type="submit" name="signup_submit" value="Sign me up" style="margin-bottom:10px;" />
                         </form>
                     
                 
               
-                    <div class="ctear">
-                        <span class="loginwith"><h3>Sign in with social network</h3></span>
-                        <button class="social-signin facebook">Log in with facebook</button>
-                        <button class="social-signin twitter">Log in with Twitter</button>
-                        <button class="social-signin google">Log in with Google+</button>
-                        <a href="login.jsp"> Already Registered ?</a>
-                    </div>
+                   
                 </div>        
-         
+         <% con.close();%>
     </body>
 </html>

@@ -62,9 +62,10 @@ try{
     <%
         if(check==1)//payment succesful
         {
-           out.print(outputHTML);
+           out.print(outputHTML+" your order succesfull");
+           response.sendRedirect("../order.jsp?mode=paytm");
            %>
-           <script>
+           <script >
                alert("Your Payment is successful");
                window.location='../order.jsp?mode=paytm';
            </script>
