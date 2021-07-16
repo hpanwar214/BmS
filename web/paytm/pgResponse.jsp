@@ -1,8 +1,8 @@
 <%@ page import="java.util.*,com.paytm.merchant.CheckSumServiceHelper,javax.servlet.*;"%>
 <%@include file="../connection.jsp" %>
 <%
-    String MID="your merchant id";
-    String MERCHANT_KEY="your merchant key";
+    String MID="qHeTRn14861892821176";
+    String MERCHANT_KEY="X9BpS6k6VyqQfzHP";
     String INDUSTRY_TYPE_ID="Retail";
     String CHANNEL_ID="WEB";
     String WEBSITE="WEBSTAGING";
